@@ -58,9 +58,9 @@ The three histograms showing the distributions of all labels in the train, valid
 #### 1. Preprocessed the image data
 
 + I did not use an conversion to grayscale, because the color of the sign is a useful information for classification
-+ I normelized the data via X_train/ 255 * 0.8 + 0.1
 + I then used sklearn.utils to shuffle the training data
-
++ I used train_test_split from sklearn.model_selection to split the data
++ I normalized the data via X_train/ 255 * 0.8 + 0.1
 
 #### 2. Final model architecture 
 
@@ -92,17 +92,14 @@ To train the model, I used:
 + cross_entropy as optimizer (tf.nn.softmax_cross_entropy_with_logits)
 + AdamOptimizer
 
-#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### 4. validation set accuracy to be at least 0.93.
+
+I stared with the Lenet DNN from the lessons and got good results from the beginning. With the given data split I could 
+not archive the necessary accuracy for the validation set, so I did split the training data and used them.
 
 My final model results were:
-* validation set accuracy of 0.901 
-* test set accuracy of 0.869
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+* validation set accuracy of 0.978 
+* test set accuracy of 0.894
 
 ### Test a Model on New Images
 
@@ -119,7 +116,7 @@ Here are five German traffic signs that I found on the web:
 The first image might be difficult to classify because its not in the list of classes.
 The rest should be fine!
 
-#### 2. model's predictions on these new traffic signs 
+#### 2. Model's predictions on these new traffic signs 
 
 Here are the results of the prediction:
 
@@ -129,45 +126,45 @@ Here are the results of the prediction:
 | Speed limit (30km/h)	| Speed limit (30km/h)							|
 | Priority road			| Priority road									|
 | No entry	      		| No entry				 				        |
-| Speed limit (100km/h)	| Right-of-way at the next intersection  		|
+| Speed limit (100km/h)	| Speed limit (30km/h) 	                    	|
 
 The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. 
-Its no wonder a not trained sign results in a false class but I don't know why the Speed limit (100km/h)
-was not correctly classified...
+Its no wonder a not trained sign results, the Speed limit (100km/h) was not correctly but as Speed limit (30km/h) 
+which is quite similar 
 
-#### 3. How certain the model prediction on each of the five new images
+#### 3. The model prediction on each of the five new images
 
 + transit prohibited 
-  + Roundabout mandatory: 99.03%
-  + Traffic signals: 0.82%
-  + General caution: 0.13%
-  + End of all speed and passing limits: 0.01%
-  + Keep right: 0.01%  
+  + Ahead only: 52.32%
+  + Speed limit (50km/h): 46.24%
+  + Keep right: 1.37%
+  + Yield: 0.06%
+  + Speed limit (30km/h): 0.00%
   
 + Speed limit (30km/h)
-  + Speed limit (30km/h): 100.00%
+  + Speed limit (30km/h): 99.87%
+  + Speed limit (20km/h): 0.13%
   + Speed limit (50km/h): 0.00%
-  + Speed limit (60km/h): 0.00%
-  + Speed limit (20km/h): 0.00%
-  + Yield: 0.00%
+  + Speed limit (70km/h): 0.00%
+  + Keep right: 0.00%
 
 + Priority road
-  + Priority road: 100.00%
-  + No entry: 0.00%
-  + No passing: 0.00%
+  + No entry: 100.00%
   + Stop: 0.00%
-  + Yield: 0.00%
+  + Traffic signals: 0.00%
+  + Slippery road: 0.00%
+  + Bumpy road: 0.00%
 
 + No entry
-  + No entry: 100.00%
-  + Speed limit (20km/h): 0.00%
-  + Slippery road: 0.00%
+  + Priority road: 100.00%
   + Stop: 0.00%
-  + Dangerous curve to the right: 0.00%
+  + End of no passing by vehicles over 3.5 metric tons: 0.00%
+  + No passing: 0.00%
+  + No passing for vehicles over 3.5 metric tons: 0.00%
 
 + Speed limit (30km/h)
-  + Right-of-way at the next intersection: 99.98%
-  + Pedestrians: 0.01%
-  + Roundabout mandatory: 0.00%
-  + Speed limit (30km/h): 0.00%
+  + Speed limit (30km/h): 89.67%
+  + Roundabout mandatory: 10.33%
+  + Speed limit (20km/h): 0.00%
   + Speed limit (50km/h): 0.00%
+  + Speed limit (70km/h): 0.00%
